@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import Input from "./common/Input";
+import Input from "../common/Input";
 import { useState } from "react";
-import Button from "./common/Button";
+import Button from "../common/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { postCadaster } from "../services/myWallet";
+import { createUser } from "../../services/myWallet";
 
 export default function Cadaster() {
 	const [name, setName] = useState("");
@@ -22,11 +22,11 @@ export default function Cadaster() {
 			email,
 			password
 		};
-		const request = postCadaster(dataLog);
+		const request = createUser(dataLog);
 		request.catch((error) => {
 			alert(error.response.data);
 		});
-		request.then((res) => {		
+		request.then(() => {		
             alert ("Usuário cadastrado com sucesso!");	
 			navigate("/");
 		});

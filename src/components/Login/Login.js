@@ -1,26 +1,35 @@
 import styled from "styled-components";
-import Button from "./common/Button";
-import Input from "./common/Input";
-import { useState } from "react";
+import Button from "../common/Button";
+import Input from "../common/Input";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { postLogin } from "../services/myWallet";
+import { getToken, userLogin } from "../../services/myWallet";
 
 export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
     const navigate = useNavigate();
+	
+	useEffect(()=>{		
+			const isLogged = getToken();
+			if (isLogged) {
+				navigate("/home");
+			}		
+	}, [navigate]);
+
 	function logInto(e) {
 		e.preventDefault();
 		const dataLog = {
 			email,
 			password,
 		};
-		const request = postLogin(dataLog);
+		const request = userLogin(dataLog);
 		request.catch((error) => {
 			alert(error.response.data);			
 		});
 		request.then((res) => {
-			localStorage.setItem("myWallet", JSON.stringify(res.data.token));			
+			localStorage.setItem("myWallet", JSON.stringify(res.data.token));
+            localStorage.setItem("myWallet/username", JSON.stringify(res.data.name));			
 			navigate("/home");
 		});
 	}
