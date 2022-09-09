@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { createMovement } from "../../services/myWallet";
@@ -10,9 +10,15 @@ export default function AddMovement() {
 	const [valor, setValor] = useState("");
 	const [description, setDescription] = useState("");
 	const navigate = useNavigate();
+    
+	useEffect(() => {
+		if (location.state === null) {
+			navigate("/home");
+		}
+	}, [navigate]);
 
 	function sendMovement(e) {
-		e.preventDefault(); 
+		e.preventDefault();
 		const movement = {
 			valor,
 			description,
