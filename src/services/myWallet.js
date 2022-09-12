@@ -15,20 +15,20 @@ function getToken() {
 }
 
 function createUser(body) {
-	return axios.post(`${URL}sign-up`, body);	
+	return axios.post(`${URL}sign-up`, body);
 }
 
 function userLogin(body) {
-	return axios.post(`${URL}sign-in`, body);	
+	return axios.post(`${URL}sign-in`, body);
 }
 
-function createMovement (body){
+function createMovement(body) {
 	const token = getToken();
-	return axios.post(`${URL}movements`, body,token);	
+	return axios.post(`${URL}movements`, body, token);
 }
-function getMovements (){
+function getMovements() {
 	const token = getToken();
-	return axios.get(`${URL}movements`,token);	
+	return axios.get(`${URL}movements`, token);
 }
 
 export { userLogin, createUser, createMovement, getMovements, getToken };

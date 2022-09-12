@@ -1,14 +1,16 @@
 import styled from "styled-components";
-import Button from "../common/Button";
-import Input from "../common/Input";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getToken, userLogin } from "../../services/myWallet";
+import { ThreeDots } from "react-loader-spinner";
+import Button from "../common/Button";
+import Input from "../common/Input";
 
 export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isDisabled, setIsDisabled] = useState(false);
+	const [buttonValue, setButtonValue] = useState("Entrar");
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -21,6 +23,7 @@ export default function Login() {
 	function logInto(e) {
 		e.preventDefault();
 		setIsDisabled(true);
+		setButtonValue(<ThreeDots color="white" height="13px" />);
 		const dataLog = {
 			email,
 			password,
@@ -28,6 +31,7 @@ export default function Login() {
 		const request = userLogin(dataLog);
 		request.catch((error) => {
 			setIsDisabled(false);
+			setButtonValue("Entrar");
 			if (error.code === "ERR_NETWORK") {
 				return alert("Falha ao conectar com o servidor");
 			}
@@ -57,7 +61,7 @@ export default function Login() {
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-				<Button value={"Entrar"} disabled={isDisabled} />
+				<Button value={buttonValue} disabled={isDisabled} />
 			</form>
 			{isDisabled ? (
 				<h2>Primeira vez? Cadastre-se!</h2>

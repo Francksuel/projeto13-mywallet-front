@@ -12,11 +12,11 @@ export default function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Login />} />
-                    <Route path="/cadaster" element={<Cadaster />} />
-                    <Route path="/home" element={<Home />} />
+					<Route path="/cadaster" element={<Cadaster />} />
+					<Route path="/home" element={<Home />} />
 					<Route path="/addmovement" element={<AddMovement />} />
 				</Routes>
 			</BrowserRouter>
 		</>
-	)
+	);
 }

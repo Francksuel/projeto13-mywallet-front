@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { createMovement } from "../../services/myWallet";
+import { ThreeDots } from "react-loader-spinner";
 import Button from "../common/Button";
 import Input from "../common/Input";
 
@@ -18,9 +19,12 @@ export default function AddMovement() {
 		}
 	}, [navigate, location.state]);
 
+	const [buttonValue, setButtonValue] = useState(`Salvar ${location.state}`);
+
 	function sendMovement(e) {
 		e.preventDefault();
 		setIsDisabled(true);
+		setButtonValue(<ThreeDots color="white" height="13px" />);
 		const movement = {
 			valor,
 			description,
@@ -29,6 +33,7 @@ export default function AddMovement() {
 		const request = createMovement(movement);
 		request.catch((error) => {
 			setIsDisabled(false);
+			setButtonValue(`Salvar ${location.state}`);
 			if (error.code === "ERR_NETWORK") {
 				return alert("Falha ao conectar com o servidor");
 			}
@@ -64,7 +69,7 @@ export default function AddMovement() {
 					disabled={isDisabled}
 					onChange={(e) => setDescription(e.target.value)}
 				/>
-				<Button value={`Salvar ${location.state}`} disabled={isDisabled} />
+				<Button value={buttonValue} disabled={isDisabled} />
 			</form>
 		</Wrapper>
 	);

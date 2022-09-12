@@ -4,6 +4,7 @@ import { useState } from "react";
 import Button from "../common/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../services/myWallet";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Cadaster() {
 	const [name, setName] = useState("");
@@ -11,11 +12,13 @@ export default function Cadaster() {
 	const [password, setPassword] = useState("");
 	const [passwordConfirm, setPasswordConfirm] = useState("");
 	const [isDisabled, setIsDisabled] = useState(false);
+	const [buttonValue, setButtonValue] = useState("Cadastrar");
 	const navigate = useNavigate();
 
 	function registration(e) {
 		e.preventDefault();
 		setIsDisabled(true);
+		setButtonValue(<ThreeDots color="white" height="13px" />);
 		if (password !== passwordConfirm) {
 			setIsDisabled(false);
 			return alert("As senhas digitadas não coincidem!");
@@ -28,6 +31,7 @@ export default function Cadaster() {
 		const request = createUser(dataLog);
 		request.catch((error) => {
 			setIsDisabled(false);
+			setButtonValue("Cadastrar");
 			if (error.code === "ERR_NETWORK") {
 				return alert("Falha ao conectar com o servidor");
 			}
@@ -71,7 +75,7 @@ export default function Cadaster() {
 					disabled={isDisabled}
 					onChange={(e) => setPasswordConfirm(e.target.value)}
 				/>
-				<Button value={"Cadastrar"} disabled={isDisabled} />
+				<Button value={buttonValue} disabled={isDisabled} />
 			</form>
 			{isDisabled ? (
 				<h2>Já tem uma conta? Entre agora!</h2>
