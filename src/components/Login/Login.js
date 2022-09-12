@@ -8,28 +8,34 @@ import { getToken, userLogin } from "../../services/myWallet";
 export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-    const navigate = useNavigate();
-	
-	useEffect(()=>{		
-			const isLogged = getToken();
-			if (isLogged) {
-				navigate("/home");
-			}		
+	const [isDisabled, setIsDisabled] = useState(false);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const isLogged = getToken();
+		if (isLogged) {
+			navigate("/home");
+		}
 	}, [navigate]);
 
 	function logInto(e) {
 		e.preventDefault();
+		setIsDisabled(true);
 		const dataLog = {
 			email,
 			password,
 		};
 		const request = userLogin(dataLog);
 		request.catch((error) => {
-			alert(error.response.data);			
+			setIsDisabled(false);
+			if (error.code === "ERR_NETWORK") {
+				return alert("Falha ao conectar com o servidor");
+			}
+			alert(error.response.data);
 		});
 		request.then((res) => {
 			localStorage.setItem("myWallet", JSON.stringify(res.data.token));
-            localStorage.setItem("myWallet/username", JSON.stringify(res.data.name));			
+			localStorage.setItem("myWallet/username", JSON.stringify(res.data.name));
 			navigate("/home");
 		});
 	}
@@ -40,20 +46,26 @@ export default function Login() {
 				<Input
 					placeholder={"E-mail"}
 					type={"email"}
-					disabled={false}
+					disabled={isDisabled}
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
 				<Input
 					placeholder={"Senha"}
 					type={"password"}
-					disabled={false}
+					disabled={isDisabled}
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-				<Button value={"Entrar"} />
+				<Button value={"Entrar"} disabled={isDisabled} />
 			</form>
-			<Link to={"/cadaster"}><h2>Primeira vez? Cadastre-se!</h2></Link>
+			{isDisabled ? (
+				<h2>Primeira vez? Cadastre-se!</h2>
+			) : (
+				<Link to={"/cadaster"}>
+					<h2>Primeira vez? Cadastre-se!</h2>
+				</Link>
+			)}
 		</Wrapper>
 	);
 }

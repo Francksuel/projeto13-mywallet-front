@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export default function Button ({value}){
+export default function Button ({value, disabled}){
     return (
-        <Wrapper>{value}</Wrapper>
+        <Wrapper disabled={disabled}>{value}</Wrapper>
     )
 }
 const Wrapper = styled.button`

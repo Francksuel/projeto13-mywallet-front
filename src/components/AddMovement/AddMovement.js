@@ -9,16 +9,18 @@ export default function AddMovement() {
 	const location = useLocation();
 	const [valor, setValor] = useState("");
 	const [description, setDescription] = useState("");
+	const [isDisabled, setIsDisabled] = useState(false);
 	const navigate = useNavigate();
-    
+
 	useEffect(() => {
 		if (location.state === null) {
 			navigate("/home");
 		}
-	}, [navigate]);
+	}, [navigate, location.state]);
 
 	function sendMovement(e) {
 		e.preventDefault();
+		setIsDisabled(true);
 		const movement = {
 			valor,
 			description,
@@ -26,6 +28,10 @@ export default function AddMovement() {
 		};
 		const request = createMovement(movement);
 		request.catch((error) => {
+			setIsDisabled(false);
+			if (error.code === "ERR_NETWORK") {
+				return alert("Falha ao conectar com o servidor");
+			}
 			alert(error.response.data);
 		});
 		request.then(() => {
@@ -44,19 +50,21 @@ export default function AddMovement() {
 					type="number"
 					value={valor}
 					name="quantity"
+					max="999999.99"
 					step="0.01"
 					min="0.01"
-					disabled={false}
+					disabled={isDisabled}
 					onChange={(e) => setValor(e.target.value)}
 				/>
 				<Input
 					placeholder="Descrição"
 					type="text"
+					maxLength="20"
 					value={description}
-					disabled={false}
+					disabled={isDisabled}
 					onChange={(e) => setDescription(e.target.value)}
 				/>
-				<Button value={`Salvar ${location.state}`} />
+				<Button value={`Salvar ${location.state}`} disabled={isDisabled} />
 			</form>
 		</Wrapper>
 	);

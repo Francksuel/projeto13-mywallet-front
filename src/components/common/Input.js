@@ -7,7 +7,7 @@ export default function Input({ placeholder, type, value, disabled, ...otherProp
             disabled={disabled}
             value={value}
             placeholder={placeholder}
-            type={type}
+            type={type}           
             {...otherProps} />
     )
 }

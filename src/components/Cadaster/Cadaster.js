@@ -10,24 +10,31 @@ export default function Cadaster() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [passwordConfirm, setPasswordConfirm] = useState("");
+	const [isDisabled, setIsDisabled] = useState(false);
 	const navigate = useNavigate();
 
 	function registration(e) {
 		e.preventDefault();
-        if (password !== passwordConfirm){
-            return alert ("As senhas digitadas não coincidem!");
-        }
+		setIsDisabled(true);
+		if (password !== passwordConfirm) {
+			setIsDisabled(false);
+			return alert("As senhas digitadas não coincidem!");
+		}
 		const dataLog = {
-            name,
+			name,
 			email,
-			password
+			password,
 		};
 		const request = createUser(dataLog);
 		request.catch((error) => {
+			setIsDisabled(false);
+			if (error.code === "ERR_NETWORK") {
+				return alert("Falha ao conectar com o servidor");
+			}
 			alert(error.response.data);
 		});
-		request.then(() => {		
-            alert ("Usuário cadastrado com sucesso!");	
+		request.then(() => {
+			alert("Usuário cadastrado com sucesso!");
 			navigate("/");
 		});
 	}
@@ -40,35 +47,39 @@ export default function Cadaster() {
 					placeholder={"Nome"}
 					type={"text"}
 					value={name}
-					disabled={false}
+					disabled={isDisabled}
 					onChange={(e) => setName(e.target.value)}
 				/>
 				<Input
 					placeholder={"E-mail"}
 					type={"email"}
 					value={email}
-					disabled={false}
+					disabled={isDisabled}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
 				<Input
 					placeholder={"Senha"}
 					type={"password"}
 					value={password}
-					disabled={false}
+					disabled={isDisabled}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 				<Input
 					placeholder={"Confirme a senha"}
 					type={"password"}
 					value={passwordConfirm}
-					disabled={false}
+					disabled={isDisabled}
 					onChange={(e) => setPasswordConfirm(e.target.value)}
 				/>
-				<Button value={"Cadastrar"} />
+				<Button value={"Cadastrar"} disabled={isDisabled} />
 			</form>
-			<Link to={"/"}>
+			{isDisabled ? (
 				<h2>Já tem uma conta? Entre agora!</h2>
-			</Link>
+			) : (
+				<Link to={"/"} disabled={isDisabled}>
+					<h2>Já tem uma conta? Entre agora!</h2>
+				</Link>
+			)}
 		</Wrapper>
 	);
 }
