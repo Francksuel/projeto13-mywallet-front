@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+<p align="center">
+  <img width="150" height="150" src="https://github.com/Francksuel/projeto13-mywallet-front/blob/main/public/logo.png">
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# My wallet
 
-## Available Scripts
+**My Wallet** - is a way to add and visualize yours financial transactions with a simple and intuitive interface.
 
-In the project directory, you can run:
+Full-Stack project using React and NodeJS referring to the thirteenth weekly project of the Driven Education course.
 
-### `npm start`
+## ⚙️ Functionalities
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**People can register using:**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Email (used for login only);
+- Name;
+- Password;
 
-### `npm test`
+**User can:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Add deposits and withdrawals;
+- List all movements with date;
+- Check current balance.
 
-### `npm run build`
+**Coming soon:**
+- Delete transactions;
+- Edit transactions;
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📱 Layout Mobile
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Cadaster - Screenshot](https://user-images.githubusercontent.com/107144900/194683922-bc61dffc-04ad-48d4-a4c4-2517a00d1938.png)
+![Add movement - Screenshot](https://user-images.githubusercontent.com/107144900/194683962-94ca8ac2-6107-4a4b-b08d-e0dd8850c31e.png)
+![List of transactions - Screenshot](https://user-images.githubusercontent.com/107144900/194683993-d65668d6-df15-4f7d-8b17-585321bf3ec1.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 💻 Technologies:
+The following tools were used in building the project:<br/>
+**Front-end (React):**
+- [Styled Components;](https://www.npmjs.com/package/styled-components)
+- [React Router Dom;](https://www.npmjs.com/package/react-router-dom)
+- [React Icons;](https://www.npmjs.com/package/react-icons)
+- [Axios;](https://www.npmjs.com/package/axios)
+- [React Loader Spinner;](https://www.npmjs.com/package/react-loader-spinner)
+- [React Circular Progressbar;](https://www.npmjs.com/package/react-circular-progressbar)
+- [Dayjs;](https://day.js.org/)<br/>
 
-### `npm run eject`
+**Back-end(NodeJS):**
+- [Express;](https://www.npmjs.com/package/express)
+- [Joi;](https://www.npmjs.com/package/joi)
+- [String Strip Html;](https://www.npmjs.com/package/string-strip-html)
+- [Uuid;](https://www.npmjs.com/package/uuid)
+- [Bcrypt;](https://www.npmjs.com/package/bcrypt)<br/>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Database:**
+- [MongoDB;](https://www.npmjs.com/package/mongodb)
